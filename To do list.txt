@@ -1,2 +1,21 @@
 #TO DO LIST : 
 
+ #Objectifs du projet :
+
+-Ca doit etre un tour par tour
+
+-Chaque joueur pose un bloc à tour de role
+
+-Afficher la configuration de la partie
+
+-Demander à chaque joueur quel coup jouer
+
+-Tout les N tours, le serpent des joueurs gagnent une case au niveau de la queu (donc en gros au lieu d'avancer et de retirer la case 
+ qui se trouve au niveau de la queu, on laisse le bloc de la queu et on avance)
+
+-Si avale fraise, alors retirer un bloc a la queu sauf si nbTour % N == 0, dans ce cas juste avancer normalement
+
+-Loose si pas de case adjacentes libres ou rentre dans un obstacle
+
+-Spawn fix (?)
+ 
