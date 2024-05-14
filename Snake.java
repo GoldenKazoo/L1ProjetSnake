@@ -13,9 +13,9 @@ public class Snake {
         snake.add(tab);
     }
 
-    public void decalleCorps() { // Cette fonction permet de décaler la liste snake du dernier élément au premier
+    public void decalleCorps() {
         for (int i = snake.size() - 1; i > 0; i--) {
-            snake.set(i, snake.get(i - 1));
+            snake.set(i, snake.get(i - 1).clone());
         }
     }
 
@@ -29,14 +29,15 @@ public class Snake {
     }
 
     public void changementTete(String direction) {
+        int[] tete = snake.get(0);
         if (direction.equals("haut")) {
-            modifValeur(0, -1);
+            tete[1] = tete[1] - 1;
         } else if (direction.equals("gauche")) {
-            modifValeur(1, -1);
+            tete[0] = tete[0] - 1;
         } else if (direction.equals("droite")) {
-            modifValeur(1, 1);
+            tete[0] = tete[0] + 1;
         } else if (direction.equals("bas")) {
-            modifValeur(0, 1);
+            tete[1] = tete[1] + 1;
         } else {
             System.out.println("Erreur");
         }
@@ -46,13 +47,14 @@ public class Snake {
         if(tour  == true)
         {
             int[] tab = snake.get(snake.size() - 1);
-            decalleCorps();
             snake.add(tab);
+            decalleCorps();
             changementTete(direction);
         }else{
             decalleCorps();
             changementTete(direction);
         }
+        
     }
 
     public void suppQueu(boolean tour, int[][] map) {
@@ -92,8 +94,8 @@ public class Snake {
     public boolean checkCoup(String direction, int[][] map) {
         int newX = checkAdjacentX(direction);
         int newY = checkAdjacentY(direction);
-        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length) {
-            return map[newX][newY] == 0;
+        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
+            return true; 
         } else {
             return false;
         }
