@@ -1,4 +1,4 @@
-#TO DO LIST : 
+#TO DO LIST : 26 mars
 
  #Objectifs du projet :
 
@@ -19,3 +19,25 @@
 
 -Spawn fix (?)
  
+#TO DO LIST : avant le 15 mai
+
+- Implementation de Snake.java
+    - Position du corps dans l'ordre ✔
+    - Deplacement du corps ✔
+        - Nouvelle position de la tete ✔
+        - Reste du corps deplace ✔
+    - Suppression ou pas de la derniere position ✔
+    - Recherche d'une position ✔
+
+- Implementation de Affichage.java
+    - Afficher le cadrillage de l'Arene
+    - Afficher un serpent
+        - Mettre sa tete dans une couleur differente
+    - Afficher fraise ou obstacle
+
+
+- Implementation de Joueur.java
+    - Afficher un menu
+    - Saisie d'une commande du joueur
+    - Saisie d'un coup d'un joueur 
+

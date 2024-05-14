@@ -8,6 +8,11 @@ public class Snake {
         snake.add(tete);
     }
 
+    public void ajout(int[] tab) //utile pour le fichier test
+    {
+        snake.add(tab);
+    }
+
     public void decalleCorps() { // Cette fonction permet de décaler la liste snake du dernier élément au premier
         for (int i = snake.size() - 1; i > 0; i--) {
             snake.set(i, snake.get(i - 1));
@@ -96,7 +101,8 @@ public class Snake {
 
     public void afficheTab(int[] tab) {
         for (int i = 0; i < tab.length; i++) {
-            System.out.println(tab[i]);
+            System.out.print(" ");
+            System.out.print(tab[i]);
         }
     }
 
