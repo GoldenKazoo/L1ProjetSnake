@@ -40,20 +40,22 @@ public class Snake {
     public void mouvement(String direction, boolean  tour) {
         if(tour  == true)
         {
-            int[] tab = {0,0};
-            snake.add(tab)
+            int[] tab = snake.get(snake.size() - 1);
+            decalleCorps();
+            snake.add(tab);
             changementTete(direction);
         }else{
-
+            decalleCorps();
+            changementTete(direction);
         }
     }
 
-    public void suppQueu(boolean tour) {
+    public void suppQueu(boolean tour, int[][] map) {
         int[] tete = snake.get(0);
         int newX = tete[0];
         int newY = tete[1];
 
-        if(map[newX][newY] == 4) //Modifiable, on va considerer 4 comme etant une fraise
+        if(map[newX][newY] == 4) 
         {
             snake.remove(snake.size() - 1);
         }
