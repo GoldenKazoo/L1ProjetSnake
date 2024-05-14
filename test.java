@@ -10,6 +10,7 @@ public static void main(String [] args)
     fenetre.setLocationRelativeTo(null); //pour ouvrir au centre
     fenetre.setResizable(false);
     fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    fenetre.
 
 }
 }
