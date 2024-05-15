@@ -21,7 +21,7 @@ public class TestSnake{
         // - Position du corps dans l'ordre ✔
         // Test de AfficheTab et Array
         snake.afficheArray();
-        
+
         // - Recherche d'une position ✔
         // Tests pour checkCoup(Et au passage checkAjacent X et Y)
         System.out.println("");
@@ -38,8 +38,9 @@ public class TestSnake{
         snake.afficheArray();
         // - Suppression ou pas de la derniere position ✔
         // Tests pour suppQueu 
-
-        snake.suppQueu(true, map);
+        System.out.println("");
+        snake.suppQueu();
+        snake.afficheArray();
 
 
 

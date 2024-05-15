@@ -57,16 +57,9 @@ public class Snake {
         
     }
 
-    public void suppQueu(boolean tour, int[][] map) {
-        int[] tete = snake.get(0);
-        int newX = tete[0];
-        int newY = tete[1];
-
-        if(map[newX][newY] == 4) 
-        {
-            snake.remove(snake.size() - 1);
-        }
-}
+    public void suppQueu() {
+        snake.remove(snake.size() - 1);
+    }
 
 
     public int checkAdjacentX(String direction) {
