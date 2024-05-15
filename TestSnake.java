@@ -39,7 +39,7 @@ public class TestSnake{
         // - Suppression ou pas de la derniere position ✔
         // Tests pour suppQueu 
         System.out.println("");
-        snake.suppQueu();
+        snake.suppQueu(false, map);
         snake.afficheArray();
 
 

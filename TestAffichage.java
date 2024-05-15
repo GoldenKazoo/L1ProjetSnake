@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.util.Random;
 
 public class TestAffichage extends JPanel {
     public static void main(String[] args) {
