@@ -37,6 +37,6 @@
 
 
 - Implementation de Joueur.java
-    - Afficher un menu
-    - Saisie d'une commande du joueur
-    - Saisie d'un coup d'un joueur 
+    - Afficher un menu ✔
+    - Saisie d'une commande du joueur ✔
+    - Saisie d'un coup d'un joueur ✔

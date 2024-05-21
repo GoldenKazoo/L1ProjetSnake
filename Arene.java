@@ -35,7 +35,6 @@ public class Arene
     void    fill_arene_element(int[][] arene, Snake element, int id)
     {
         int array_index;
-
         array_index = 0;
         for(int i = 0; i <= size; i++)
         {

@@ -6,8 +6,7 @@ public class Affichage extends JPanel {
 
     int tailleLargeur;
     int tailleHauteur;
-    int tailleTuile = 100;
-    Snake p1 = new Snake();
+    int tailleTuile = 50;
     Tuile teteP1;
     Tuile teteP2;
     Tuile mur;
@@ -24,7 +23,7 @@ public class Affichage extends JPanel {
         setPreferredSize(new Dimension(this.tailleLargeur, this.tailleHauteur));
         setBackground(Color.black);
         teteP1 = new Tuile(2, 2);
-        teteP2 = new Tuile(5, 2);
+        teteP2 = new Tuile(13, 2);
         fraise = new Tuile();
         mur = new Tuile();
         random1 = new Random();
@@ -58,10 +57,6 @@ public class Affichage extends JPanel {
             obj.drawLine(0, i*tailleTuile, tailleLargeur, i*tailleTuile);
         }
 
-        for(int i = 0; i < p1.size(); i++)
-        {
-
-        }
 
         //Fraise
         obj.setColor(Color.red);
