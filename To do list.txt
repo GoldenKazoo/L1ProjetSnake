@@ -30,8 +30,8 @@
     - Recherche d'une position ✔
 
 - Implementation de Affichage.java
-    - Afficher le cadrillage de l'Arene
-    - Afficher un serpent
+    - Afficher le cadrillage de l'Arene ✔
+    - Afficher un serpent ✔X
         - Mettre sa tete dans une couleur differente
     - Afficher fraise ou obstacle
 
@@ -40,4 +40,3 @@
     - Afficher un menu
     - Saisie d'une commande du joueur
     - Saisie d'un coup d'un joueur 
-
