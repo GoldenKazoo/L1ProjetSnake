@@ -3,17 +3,18 @@ public class Arene
 {
     int size;
     int [][] arena = new int[size][size];
+    
 
     void    fill_arene_all(int[][] arene, Snake p1, Snake p2, Snake obstacle, Snake fraise)
     {
         fill_basic_arene(arene);
         fill_arene_element(arene, p1, 1);
         fill_arene_element(arene, p2, 2);
-        fill_arene_element(arene, obstacle, 4); //Faire cette fn
-        fill_arene_element(arene, fraise, 3); //Faire cette fn
+        fill_arene_element(arene, obstacle,4); //Faire cette fn
+        fill_arene_element(arene, fraise,3); //Faire cette fn
     }
 
-    void    fill_basic_arene(int[][] arene)
+    void    fill_basic_arene(int[][] arena)
     {
         for(int i = 0; i <= size; i++)
         {
@@ -21,11 +22,11 @@ public class Arene
             {
                 if (i == 0 || j == 0 || i == size || j == size)
                 {
-                    arene[i][j] = 4;
+                    arena[i][j] = 4;
                 }
                 else
                 {
-                    arene[i][j] = 0;
+                    arena[i][j] = 0;
                 }
             }
         }
@@ -51,7 +52,7 @@ public class Arene
         }
     }
 
-    int    get_x(Snake snake, int array_index)
+    int get_x(Snake snake, int array_index)
     {
         int[] corps = snake.get(array_index);
         return corps[0];
@@ -61,10 +62,5 @@ public class Arene
     {
         int[] corps = snake.get(array_index);
         return corps[1];
-    }
-
-    public  void    main(String[] args)
-    {
-
     }
 }
