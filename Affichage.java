@@ -1,11 +1,13 @@
-import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
+import javax.swing.*;
 
 public class Affichage extends JPanel {
 
     int tailleLargeur;
     int tailleHauteur;
     int tailleTuile = 100;
+    Snake p1 = new Snake();
     Tuile teteP1;
     Tuile teteP2;
     Tuile mur;
@@ -54,6 +56,11 @@ public class Affichage extends JPanel {
             obj.setColor(Color.white);
             obj.drawLine(i*tailleTuile, 0, i*tailleTuile, i* tailleHauteur);
             obj.drawLine(0, i*tailleTuile, tailleLargeur, i*tailleTuile);
+        }
+
+        for(int i = 0; i < p1.size(); i++)
+        {
+
         }
 
         //Fraise

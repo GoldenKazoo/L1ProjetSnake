@@ -17,7 +17,7 @@ public class Snake {
         for (int i = snake.size() - 1; i > 0; i--) {
             snake.set(i, snake.get(i - 1).clone());
         }
-    }
+    } 
 
     public void modifValeur(int index, int valeur) {
         int[] tete = snake.get(0);
@@ -41,6 +41,11 @@ public class Snake {
         } else {
             System.out.println("Erreur");
         }
+    }
+
+    public  int[] get (int array_index)
+    {
+        return (snake.get(array_index));
     }
 
     public void mouvement(String direction, boolean  tour) {
