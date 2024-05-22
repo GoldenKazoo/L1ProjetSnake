@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 
 public class Arene extends JFrame{
@@ -94,25 +96,90 @@ public class Arene extends JFrame{
 
     public void update() {
     tour++;
-    joueur1.demanderCoup();
-    if (joueur1.getCoup() != null) {
-        snake1.mouvement(joueur1.getCoup(), tour,refreshtour);
-        fillArena();
-        affichage.repaint();
+    boolean lose = false;
+    if (lose == false) {
+        joueur1.demanderCoup();
+        if (joueur1.getCoup() != null) {
+            lose = endGame(snake1, joueur1);
+            if (lose == true) {
+                loseFrame();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                System.exit(0);
+                    
+            } else {
+                snake1.mouvement(joueur1.getCoup(), tour,refreshtour);
+                fillArena();
+                affichage.repaint();
+            }
     }
-    joueur2.demanderCoup();
-    if (joueur2.getCoup() != null) {
-        snake2.mouvement(joueur2.getCoup(), tour, refreshtour);
-        System.out.println("Pass");
-        fillArena();
-        affichage.repaint();
     }
-
+    if (lose == false) {
+        joueur2.demanderCoup();
+        if (joueur2.getCoup() != null) {
+            lose = endGame(snake2, joueur2);
+            if (lose == true) {
+                loseFrame();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                System.exit(0);
+            } else {
+                snake2.mouvement(joueur2.getCoup(), tour, refreshtour);
+                System.out.println("Pass");
+                fillArena();
+                affichage.repaint();
+                }
+            }
+    }
+    }
     // maj de l'affichage
 
     // implementer les colision
+    public boolean checkCoup(String direction, int[][] map, Snake s) {
+        int newX = s.checkAdjacentX(direction);
+        int newY = s.checkAdjacentY(direction);
+        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
+            return true; 
+        } else {
+            return false;
+        }
+    }
+
+    public void loseFrame(){
+        JFrame frame = new JFrame("BLOCKADE");
+        JLabel lose = new JLabel("Vous avez perdu");
+        lose.setBounds(20, 20, 200, 28);
+
+        frame.add(lose);
+        frame.setSize(250,180);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    public boolean endGame(Snake s, Joueur j){
+        // getDirection est une fonction permettant d'avoir la direction du joueur 
+        String direction = j.getCoup();
+        boolean game = checkCoup(direction, arena, s);
+        if (game == true) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     // A faire : implémenter la logique pour vérifier si un joueur a perdu
-}
+
 
     public static void main(String[] args) {
         int tailleFenetre = 800;

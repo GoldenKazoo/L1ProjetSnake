@@ -16,6 +16,7 @@ public class Joueur {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Tu as rien mis, entre un coup la:");
             coup = scanner.nextLine();
+            scanner.close();
         }
     }
 
