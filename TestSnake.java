@@ -34,12 +34,12 @@ public class TestSnake{
     
         // - Deplacement du corps ✔
         // Tests pour mouvement
-        snake.mouvement("gauche", true);
+        snake.mouvement("gauche", 5, 6);
         snake.afficheArray();
         // - Suppression ou pas de la derniere position ✔
         // Tests pour suppQueu 
         System.out.println("");
-        snake.suppQueu(false, map);
+        snake.suppQueu();
         snake.afficheArray();
 
 

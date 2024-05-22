@@ -31,12 +31,12 @@ public class Arene extends JFrame{
     }
 
     public void fillArena() {
+        placeObstacles();
         // Placer les snakes dans l'arène
         placeSnake(arena, snake1, 1);
         placeSnake(arena, snake2, 2);
 
         // Placer les obstacles et les fruits
-        placeObstacles();
         placeFruits();
     }
 
@@ -51,6 +51,8 @@ public class Arene extends JFrame{
             {
                 arene[i][j] = id;
                 array_index++;
+                i = 0;
+                j = 0;
             }
         }
     }
@@ -94,22 +96,19 @@ public class Arene extends JFrame{
     tour++;
     joueur1.demanderCoup();
     if (joueur1.getCoup() != null) {
-        snake1.mouvement(joueur1.getCoup(), tour % refreshtour == 0);
-        placeSnake(arena, snake1, 1);
-        snake1.suppQueu(tour % refreshtour == 0, arena);
+        snake1.mouvement(joueur1.getCoup(), tour,refreshtour);
+        fillArena();
         affichage.repaint();
     }
     joueur2.demanderCoup();
     if (joueur2.getCoup() != null) {
-        snake2.mouvement(joueur2.getCoup(), tour % refreshtour == 0);
+        snake2.mouvement(joueur2.getCoup(), tour, refreshtour);
         System.out.println("Pass");
-        placeSnake(arena, snake2, 2);
-        snake2.suppQueu(tour % refreshtour == 0, arena);
+        fillArena();
         affichage.repaint();
     }
 
     // maj de l'affichage
-    affichage.repaint();
 
     // implementer les colision
     // A faire : implémenter la logique pour vérifier si un joueur a perdu

@@ -52,28 +52,30 @@ public class Snake {
         return (snake.get(array_index));
     }
 
-    public void mouvement(String direction, boolean  tour) {
-        if(tour  == true)
+    public void mouvement(String direction, int tour, int refresh) {
+        if(tour % refresh  == 0)
         {
             int[] tab = snake.get(snake.size() - 1);
             snake.add(tab);
             decalleCorps();
             changementTete(direction);
+            afficheArray();
+
         }else{
             decalleCorps();
             changementTete(direction);
+            afficheArray();
         }
         
     }
 
-    public void suppQueu(boolean tour, int[][] map) {
-        int[] tete = snake.get(0);
-        int newX = tete[0];
-        int newY = tete[1];
-
-        if(map[newX][newY] == 4) 
+    public void suppQueu() {
+        if(snake.size() == 1 ||snake.size() == 0)
         {
-            snake.remove(snake.size() - 1);
+
+        }
+        else{
+        snake.remove(snake.size() - 1);
         }
 }
 
