@@ -2,7 +2,7 @@ NAME = Projet
 
 CFLAGS =
 
-SRCS = Affichage.java Joueur.java Arene.java Snake.java
+SRCS = Affichage.java Joueur.java Arene.java Snake.java TestAffichage.java TestJoueur.java TestSnake.java
 
 all: ${NAME}
 

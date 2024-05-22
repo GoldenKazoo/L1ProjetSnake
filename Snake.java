@@ -34,13 +34,13 @@ public class Snake {
 
     public void changementTete(String direction) {
         int[] tete = snake.get(0);
-        if (direction.equals("haut")) {
+        if (direction.equals("gauche")) {
             tete[1] = tete[1] - 1;
-        } else if (direction.equals("gauche")) {
+        } else if (direction.equals("haut")) {
             tete[0] = tete[0] - 1;
-        } else if (direction.equals("droite")) {
-            tete[0] = tete[0] + 1;
         } else if (direction.equals("bas")) {
+            tete[0] = tete[0] + 1;
+        } else if (direction.equals("droite")) {
             tete[1] = tete[1] + 1;
         } else {
             System.out.println("Erreur");
@@ -123,26 +123,6 @@ public class Snake {
             System.out.println();
         }
     }
-
-  /*   public static void main(String[] args) {
-        int[] tab1 = {1, 2};
-        int[] tab2 = {3, 4};
-        int[] tab3 = {5, 6};
-        int[] tab4 = {7, 8};
-
-        Snake snake = new Snake(tab1);
-        snake.snake.add(tab2);
-        snake.snake.add(tab3);
-        snake.snake.add(tab4);
-
-        // Example method calls
-        snake.afficheArray();
-        System.out.println();
-
-        snake.decalleCorps();
-        snake.afficheArray();
-        System.out.println();
-    } */
 
     public ArrayList<int[]> getSnake() {
         return snake;
