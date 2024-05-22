@@ -8,6 +8,10 @@ public class Snake {
         snake.add(tete);
     }
 
+    public int size() {
+        return snake.size();
+    }
+
     public void ajout(int[] tab) //utile pour le fichier test
     {
         snake.add(tab);
@@ -139,4 +143,8 @@ public class Snake {
         snake.afficheArray();
         System.out.println();
     } */
+
+    public ArrayList<int[]> getSnake() {
+        return snake;
+    }
 }
