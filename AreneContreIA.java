@@ -12,9 +12,9 @@ public class AreneContreIA extends JFrame{
 
     public Joueur joueur1;
     public JoueurAleatoire IA;
-
-    public Affichage affichage;
     public int tour;
+    public Affichage affichage;
+    public Tour objtour = new Tour();
     public int refreshtour;
     public Random random;
 
@@ -27,7 +27,7 @@ public class AreneContreIA extends JFrame{
         this.IA = new JoueurAleatoire("Bob", snake2);
         this.affichage = new Affichage(tailleFenetre, tailleFenetre, arena);
         this.tour = 0;
-        this.refreshtour = refreshtour;
+        this.refreshtour = objtour.getTour();
         this.random = new Random();
         fillArena();
     }

@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -12,9 +13,9 @@ public class Arene extends JFrame{
 
     public Joueur joueur1;
     public Joueur joueur2;
-
-    public Affichage affichage;
     public int tour;
+    public Affichage affichage;
+    public Tour objtour = new Tour();
     public int refreshtour;
     public Random random;
 
@@ -27,7 +28,7 @@ public class Arene extends JFrame{
         this.joueur2 = new Joueur("P2");
         this.affichage = new Affichage(tailleFenetre, tailleFenetre, arena);
         this.tour = 0;
-        this.refreshtour = refreshtour;
+        this.refreshtour = objtour.getTour();
         this.random = new Random();
         fillArena();
     }
