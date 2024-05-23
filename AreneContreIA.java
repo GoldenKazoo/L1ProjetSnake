@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
@@ -92,6 +91,16 @@ public class AreneContreIA extends JFrame{
 
     public void placeFruits() {
         //faire fn
+        Random number = new Random();
+        int nbFraise = 0;
+        int fraiseX = number.nextInt(18);
+        int fraiseY = number.nextInt(18);
+        System.out.println("TOUR MODULO REFRESH TOUR"+tour % refreshtour);
+        if (tour % refreshtour == 0 && nbFraise <= 2) {
+            arena[fraiseX][fraiseY] = 3;
+            nbFraise ++;
+        }
+
     }
 
     public void update() {
