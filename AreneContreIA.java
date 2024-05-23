@@ -3,7 +3,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
-public class Arene extends JFrame{
+public class AreneContreIA extends JFrame{
     public int size;
     public int[][] arena;
 
@@ -11,20 +11,20 @@ public class Arene extends JFrame{
     public Snake snake2;
 
     public Joueur joueur1;
-    public Joueur joueur2;
+    public JoueurAleatoire IA;
 
     public Affichage affichage;
     public int tour;
     public int refreshtour;
     public Random random;
 
-    public Arene(int size, int refreshtour, int tailleFenetre) {
+    public AreneContreIA(int size, int refreshtour, int tailleFenetre) {
         this.size = size;
         this.arena = new int[size][size];
         this.snake1 = new Snake(new int[]{2, 4});
         this.snake2 = new Snake(new int[]{2, 16});
         this.joueur1 = new Joueur("P1");
-        this.joueur2 = new Joueur("P2");
+        this.IA = new JoueurAleatoire("Bob", snake2);
         this.affichage = new Affichage(tailleFenetre, tailleFenetre, arena);
         this.tour = 0;
         this.refreshtour = refreshtour;
@@ -100,13 +100,12 @@ public class Arene extends JFrame{
     if (lose == false) {
         joueur1.demanderCoup();
         if (joueur1.getCoup() != null) {
-            lose = endGame(snake1, joueur1);
+			lose = endGame(snake1, joueur1);
             if (lose == true) {
                 loseFrame(joueur1);
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 System.exit(0);
@@ -119,11 +118,11 @@ public class Arene extends JFrame{
     }
     }
     if (lose == false) {
-        joueur2.demanderCoup();
-        if (joueur2.getCoup() != null) {
-            lose = endGame(snake2, joueur2);
+		IA.rechercheCoup(arena);
+        if (IA.getCoup() != null) {
+            lose = endGame(snake2, IA);
             if (lose == true) {
-                loseFrame(joueur2);
+                loseFrame(IA);
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -132,7 +131,8 @@ public class Arene extends JFrame{
                 }
                 System.exit(0);
             } else {
-                snake2.mouvement(joueur2.getCoup(), tour, refreshtour);
+                snake2.mouvement(IA.getCoup(), tour, refreshtour);
+				IA.clear();
                 System.out.println("Pass");
                 fillArena();
                 affichage.repaint();
@@ -153,7 +153,33 @@ public class Arene extends JFrame{
         }
     }
 
-    public void loseFrame(Joueur joueur){
+    public void loseFrame(JoueurAleatoire IA){
+        JFrame frame = new JFrame("BLOCKADE");
+        JLabel lose = new JLabel(IA.nom + " a perdu");
+        lose.setBounds(20, 20, 200, 28);
+
+        frame.add(lose);
+        frame.setSize(250,180);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    public boolean endGame(Snake s, JoueurAleatoire j){
+        // getDirection est une fonction permettant d'avoir la direction du joueur
+        String direction = j.getCoup();
+        boolean game = checkCoup(direction, arena, s);
+        if (game == true) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+	public void loseFrame(Joueur joueur){
         JFrame frame = new JFrame("BLOCKADE");
         JLabel lose = new JLabel(joueur.nom + " a perdu");
         lose.setBounds(20, 20, 200, 28);
@@ -185,7 +211,7 @@ public class Arene extends JFrame{
         int tailleFenetre = 800;
         int tailleArene = 20;
         int refreshtour = 5;
-        Arene arene = new Arene(tailleArene, refreshtour, tailleFenetre);
+        AreneContreIA arene = new AreneContreIA(tailleArene, refreshtour, tailleFenetre);
 
         JFrame frame = new JFrame("Snake-Blockade");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

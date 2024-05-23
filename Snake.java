@@ -21,7 +21,7 @@ public class Snake {
         for (int i = snake.size() - 1; i > 0; i--) {
             snake.set(i, snake.get(i - 1).clone());
         }
-    } 
+    }
 
     public void modifValeur(int index, int valeur) {
         int[] tete = snake.get(0);
@@ -34,13 +34,13 @@ public class Snake {
 
     public void changementTete(String direction) {
         int[] tete = snake.get(0);
-        if (direction.equals("gauche")) {
+        if (direction.equals("G")) {
             tete[1] = tete[1] - 1;
-        } else if (direction.equals("haut")) {
+        } else if (direction.equals("H")) {
             tete[0] = tete[0] - 1;
-        } else if (direction.equals("bas")) {
+        } else if (direction.equals("B")) {
             tete[0] = tete[0] + 1;
-        } else if (direction.equals("droite")) {
+        } else if (direction.equals("D")) {
             tete[1] = tete[1] + 1;
         } else {
             System.out.println("Erreur");
@@ -66,7 +66,7 @@ public class Snake {
             changementTete(direction);
             afficheArray();
         }
-        
+
     }
 
     public void suppQueu() {
@@ -82,9 +82,9 @@ public class Snake {
 
     public int checkAdjacentX(String direction) {
         int[] tete = snake.get(0);
-        if (direction.equals("haut")) {
+        if (direction.equals("H")) {
             return tete[0] - 1;
-        } else if (direction.equals("bas")) {
+        } else if (direction.equals("B")) {
             return tete[0] + 1;
         } else {
             return tete[0];
@@ -93,9 +93,9 @@ public class Snake {
 
     public int checkAdjacentY(String direction) {
         int[] tete = snake.get(0);
-        if (direction.equals("gauche")) {
+        if (direction.equals("G")) {
             return tete[1] - 1;
-        } else if (direction.equals("droite")) {
+        } else if (direction.equals("D")) {
             return tete[1] + 1;
         } else {
             return tete[1];
@@ -106,7 +106,7 @@ public class Snake {
         int newX = checkAdjacentX(direction);
         int newY = checkAdjacentY(direction);
         if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
-            return true; 
+            return true;
         } else {
             return false;
         }
