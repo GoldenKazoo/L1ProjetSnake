@@ -6,7 +6,7 @@ public class Tour {
     String tour;
 
     public void demandertour() {
-        tour = JOptionPane.showInputDialog(null, "Votre  snake grandira tout les n tours, choisissez n", "Pourquoi tant de N, L, est ce parceque personne ne vous M", JOptionPane.PLAIN_MESSAGE);
+        tour = JOptionPane.showInputDialog(null, "Vos snake grandiront tout les n tours, choisissez n", "Pourquoi tant de N, L, est ce parceque personne ne vous M", JOptionPane.PLAIN_MESSAGE);
 
         if (tour == null) {
             Scanner scanner = new Scanner(System.in);
