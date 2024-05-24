@@ -22,27 +22,27 @@ public class JoueurAleatoire
 		if(arene[tete[0] - 1][tete[1]] == 0)
 		{
 			this.possible.add("H");
-			System.err.println("Oui");
+
 		}
 		if(arene[tete[0]][tete[1] - 1] == 0)
 		{
 			this.possible.add("G");
-			System.err.println("Oui");
+
 		}
 		if(arene[tete[0]][tete[1] + 1] == 0)
 		{
 			this.possible.add("D");
-			System.err.println("Oui");
+
 		}
 		if(arene[tete[0] + 1][tete[1]] == 0)
 		{
 			this.possible.add("B");
-			System.err.println("Oui");
+
 		}
 		if(possible.size() == 0)
 		{
 			this.possible.add("H");
-			System.err.println("Oui");
+
 		}
     }
 

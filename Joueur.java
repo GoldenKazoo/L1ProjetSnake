@@ -14,7 +14,7 @@ public class Joueur {
 
         if (coup == null) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Tu as rien mis, entre un coup la:");
+            System.out.println("Tu as rien mis, il faut entrer un coup:");
             coup = scanner.nextLine();
             scanner.close();
         }

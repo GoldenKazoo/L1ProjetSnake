@@ -10,7 +10,7 @@ public class Tour {
 
         if (tour == null) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Tu as rien mis, entre un tour la:");
+            System.out.println("Tu as rien mis, il faut entrer un coup:");
             tour = scanner.nextLine();
             scanner.close();
         }

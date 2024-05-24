@@ -59,12 +59,10 @@ public class Snake {
             snake.add(tab);
             decalleCorps();
             changementTete(direction);
-            afficheArray();
 
         }else{
             decalleCorps();
             changementTete(direction);
-            afficheArray();
         }
 
     }
@@ -105,7 +103,7 @@ public class Snake {
     public boolean checkCoup(String direction, int[][] map) {
         int newX = checkAdjacentX(direction);
         int newY = checkAdjacentY(direction);
-        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
+        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && (map[newX][newY] == 0 || map[newX][newY] == 3)) {
             return true;
         } else {
             return false;

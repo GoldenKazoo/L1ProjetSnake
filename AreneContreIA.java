@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -8,7 +9,7 @@ public class AreneContreIA extends JFrame{
 
     public Snake snake1;
     public Snake snake2;
-
+    public Snake fruits;
     public Joueur joueur1;
     public JoueurAleatoire IA;
     public int tour;
@@ -16,12 +17,14 @@ public class AreneContreIA extends JFrame{
     public Tour objtour = new Tour();
     public int refreshtour;
     public Random random;
+    int nbFruits = 0;
 
     public AreneContreIA(int size, int refreshtour, int tailleFenetre) {
         this.size = size;
         this.arena = new int[size][size];
         this.snake1 = new Snake(new int[]{2, 4});
         this.snake2 = new Snake(new int[]{2, 16});
+        this.fruits = new Snake(new int[] {9, 9});
         this.joueur1 = new Joueur("P1");
         this.IA = new JoueurAleatoire("Bob", snake2);
         this.affichage = new Affichage(tailleFenetre, tailleFenetre, arena);
@@ -33,15 +36,12 @@ public class AreneContreIA extends JFrame{
 
     public void fillArena() {
         placeObstacles();
-        // Placer les snakes dans l'arène
-        placeSnake(arena, snake1, 1);
-        placeSnake(arena, snake2, 2);
-
-        // Placer les obstacles et les fruits
-        placeFruits();
+        placeElement(arena, snake2, 2);
+        placeElement(arena, snake1, 1);
+        placeElement(arena, fruits, 3);
     }
 
-    public void placeSnake(int[][] arene, Snake element, int id)
+    public void placeElement(int[][] arene, Snake element, int id)
 {
     int array_index = 0;
     for (int i = 0; i < size; i++)
@@ -89,21 +89,26 @@ public class AreneContreIA extends JFrame{
         }
     }
 
-    public void placeFruits() {
-        //faire fn
-        Random number = new Random();
-        int nbFraise = 0;
-        int fraiseX = number.nextInt(18);
-        int fraiseY = number.nextInt(18);
-        System.out.println("TOUR MODULO REFRESH TOUR"+tour % refreshtour);
-        if (tour % refreshtour == 0 && nbFraise <= 2) {
-            arena[fraiseX][fraiseY] = 3;
-            nbFraise ++;
+
+    public void generationFruits() {
+        int[] fruitCoordonnee = new int[2];
+        while(nbFruits <= 1)
+        {
+            Random number = new Random();
+            while(fruits.snake.size() <= 1)
+            {
+            fruitCoordonnee[0] = 1 + number.nextInt(18);
+            fruitCoordonnee[1] = 1 + number.nextInt(18);
+            fruits.snake.add(fruitCoordonnee);
+            nbFruits++;
+            }
+            nbFruits++;
         }
 
     }
 
     public void update() {
+    generationFruits();
     tour++;
     boolean lose = false;
     if (lose == false) {
@@ -142,20 +147,22 @@ public class AreneContreIA extends JFrame{
             } else {
                 snake2.mouvement(IA.getCoup(), tour, refreshtour);
 				IA.clear();
-                System.out.println("Pass");
                 fillArena();
                 affichage.repaint();
                 }
             }
     }
     }
-    // maj de l'affichage
 
-    // implementer les colision
     public boolean checkCoup(String direction, int[][] map, Snake s) {
         int newX = s.checkAdjacentX(direction);
-        int newY = s.checkAdjacentY(direction);
-        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
+        int newY = s.checkAdjacentY(direction) ;
+        if((map[newX][newY] == 3))
+        {
+            s.suppQueu();
+            return true;
+        }
+        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && (map[newX][newY] == 0)) {
             return true;
         } else {
             return false;
@@ -163,7 +170,7 @@ public class AreneContreIA extends JFrame{
     }
 
     public void loseFrame(JoueurAleatoire IA){
-        JFrame frame = new JFrame("BLOCKADE");
+        JFrame frame = new JFrame("C'est un bide");
         JLabel lose = new JLabel(IA.nom + " a perdu");
         lose.setBounds(20, 20, 200, 28);
 
@@ -175,6 +182,25 @@ public class AreneContreIA extends JFrame{
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
+
+    public void suppFraise(Snake fraise, Snake s)
+    {
+        for(int i = 0; i <= fraise.snake.size() - 1; i++)
+        {
+            System.out.println(get_x(s, 0));
+            System.out.println(get_y(s,0));
+            System.out.println(get_x(fraise,i));
+            System.out.println(get_y(fraise, i));
+            s.afficheArray();
+            System.out.println();
+            fraise.afficheArray();
+            System.out.println("-----------------------------------");
+            if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0))
+            {
+                fraise.snake.remove(i);
+            }
+        }
     }
 
     public boolean endGame(Snake s, JoueurAleatoire j){
@@ -189,7 +215,7 @@ public class AreneContreIA extends JFrame{
     }
 
 	public void loseFrame(Joueur joueur){
-        JFrame frame = new JFrame("BLOCKADE");
+        JFrame frame = new JFrame("C'est un bide");
         JLabel lose = new JLabel(joueur.nom + " a perdu");
         lose.setBounds(20, 20, 200, 28);
 
@@ -230,13 +256,12 @@ public class AreneContreIA extends JFrame{
         frame.pack();
         frame.setVisible(true);
         while (true) {
-            for (int i = 0; i < arene.arena.length; i++) {
+       /*     for (int i = 0; i < arene.arena.length; i++) {
                 for (int j = 0; j < arene.arena[i].length; j++) {
                     System.out.print(arene.arena[i][j] + " ");
                 }
                 System.out.println();
-            }
-            System.out.println("Pass");
+            }*/
             arene.update();
         }
     }
