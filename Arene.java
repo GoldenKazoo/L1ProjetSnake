@@ -5,9 +5,11 @@ import javax.swing.*;
 public class Arene extends JFrame{
     public int size;
     public int[][] arena;
+    int nbFruits;
 
     public Snake snake1;
     public Snake snake2;
+    public Snake fruits;
 
     public Joueur joueur1;
     public Joueur joueur2;
@@ -24,6 +26,7 @@ public class Arene extends JFrame{
         this.snake2 = new Snake(new int[]{2, 16});
         this.joueur1 = new Joueur("P1");
         this.joueur2 = new Joueur("P2");
+        this.fruits = new Snake(new int[] {9, 9});
         this.affichage = new Affichage(tailleFenetre, tailleFenetre, arena);
         this.tour = 0;
         this.refreshtour = objtour.getTour();
@@ -36,9 +39,49 @@ public class Arene extends JFrame{
         // Placer les snakes dans l'arène
         placeSnake(arena, snake1, 1);
         placeSnake(arena, snake2, 2);
+        placeSnake(arena, fruits, 3);
 
         // Placer les obstacles et les fruits
         placeFruits();
+    }
+
+    public void generationFruits() {
+        int[] fruitCoordonnee = new int[2];
+            Random number = new Random();
+            int x = 1 + number.nextInt(18);
+            int y = 1 + number.nextInt(18);
+            if(arena[x][y] != 0)
+            {
+                generationFruits();
+            }
+
+            while(fruits.snake.size() <= 2)
+            {
+            fruitCoordonnee[0] = x;
+            fruitCoordonnee[1] = y;
+            fruits.snake.add(fruitCoordonnee);
+            }
+            nbFruits++;
+
+    }
+
+    public void suppFraise(Snake fraise, Snake s, String direction)
+    {
+        for(int i = 0; i <= fraise.snake.size() - 1; i++)
+        {
+            if(direction.equals("B"))
+                if(get_x(fraise,i) == get_x(s, 0) + 1 && get_y(fraise, i) == get_y(s,0))
+                    fraise.snake.remove(i);
+            if(direction.equals("H"))
+                if(get_x(fraise,i) == get_x(s, 0) - 1 && get_y(fraise, i) == get_y(s,0))
+                    fraise.snake.remove(i);
+            if(direction.equals("D"))
+                if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0) + 1)
+                    fraise.snake.remove(i);
+            if(direction.equals("G"))
+                if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0) - 1)
+                    fraise.snake.remove(i);
+        }
     }
 
     public void placeSnake(int[][] arene, Snake element, int id)
@@ -94,6 +137,7 @@ public class Arene extends JFrame{
     }
 
     public void update() {
+    generationFruits();
     tour++;
     boolean lose = false;
     if (lose == false) {
@@ -144,8 +188,15 @@ public class Arene extends JFrame{
     // implementer les colision
     public boolean checkCoup(String direction, int[][] map, Snake s) {
         int newX = s.checkAdjacentX(direction);
-        int newY = s.checkAdjacentY(direction);
-        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY] == 0) {
+        int newY = s.checkAdjacentY(direction) ;
+        if((map[newX][newY] == 3))
+        {
+            nbFruits--;
+            suppFraise(fruits, s, direction);
+            s.suppQueu();
+            return true;
+        }
+        if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && (map[newX][newY] == 0)) {
             return true;
         } else {
             return false;

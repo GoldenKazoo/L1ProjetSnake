@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -91,19 +92,20 @@ public class AreneContreIA extends JFrame{
 
     public void generationFruits() {
         int[] fruitCoordonnee = new int[2];
-        while(nbFruits <= 1)
-        {
             Random number = new Random();
-            while(fruits.snake.size() <= 1)
+            int x = 1 + number.nextInt(18);
+            int y = 1 + number.nextInt(18);
+            if(arena[x][y] != 0)
             {
-            fruitCoordonnee[0] = 1 + number.nextInt(18);
-            fruitCoordonnee[1] = 1 + number.nextInt(18);
-            fruits.snake.add(fruitCoordonnee);
-            nbFruits++;
+                generationFruits();
             }
-            nbFruits++;
-        }
 
+            while(fruits.snake.size() <= 2)
+            {
+            fruitCoordonnee[0] = x;
+            fruitCoordonnee[1] = y;
+            fruits.snake.add(fruitCoordonnee);
+            }
     }
 
     public void update() {
@@ -158,6 +160,8 @@ public class AreneContreIA extends JFrame{
         int newY = s.checkAdjacentY(direction) ;
         if((map[newX][newY] == 3))
         {
+            nbFruits--;
+            suppFraise(fruits, s, direction);
             s.suppQueu();
             return true;
         }
@@ -183,22 +187,22 @@ public class AreneContreIA extends JFrame{
 
     }
 
-    public void suppFraise(Snake fraise, Snake s)
+    public void suppFraise(Snake fraise, Snake s, String direction)
     {
         for(int i = 0; i <= fraise.snake.size() - 1; i++)
         {
-            System.out.println(get_x(s, 0));
-            System.out.println(get_y(s,0));
-            System.out.println(get_x(fraise,i));
-            System.out.println(get_y(fraise, i));
-            s.afficheArray();
-            System.out.println();
-            fraise.afficheArray();
-            System.out.println("-----------------------------------");
-            if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0))
-            {
-                fraise.snake.remove(i);
-            }
+            if(direction.equals("B"))
+                if(get_x(fraise,i) == get_x(s, 0) + 1 && get_y(fraise, i) == get_y(s,0))
+                    fraise.snake.remove(i);
+            if(direction.equals("H"))
+                if(get_x(fraise,i) == get_x(s, 0) - 1 && get_y(fraise, i) == get_y(s,0))
+                    fraise.snake.remove(i);
+            if(direction.equals("D"))
+                if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0) + 1)
+                    fraise.snake.remove(i);
+            if(direction.equals("G"))
+                if(get_x(fraise,i) == get_x(s, 0) && get_y(fraise, i) == get_y(s,0) - 1)
+                    fraise.snake.remove(i);
         }
     }
 
