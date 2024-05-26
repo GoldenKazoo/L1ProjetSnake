@@ -1,8 +1,11 @@
 import java.util.Random;
-
 import javax.swing.*;
 
+// Creation de la classe Arene qui gere l'arene ou joue les deux joueurs 
 public class Arene extends JFrame{
+   
+    // Initialisation de toute les variables utiles 
+
     public int size;
     public int[][] arena;
     int nbFruits;
@@ -42,9 +45,10 @@ public class Arene extends JFrame{
         placeSnake(arena, fruits, 3);
 
         // Placer les obstacles et les fruits
-        placeFruits();
+        /* placeFruits(); */
     }
 
+    // Fonction qui permet de generer les Fraises selon des conditions tel que leur nombre / le nb de tour 
     public void generationFruits() {
         int[] fruitCoordonnee = new int[2];
             Random number = new Random();
@@ -65,6 +69,7 @@ public class Arene extends JFrame{
 
     }
 
+    // Fonction qui supprime la fraise si elle est manger par un snake 
     public void suppFraise(Snake fraise, Snake s, String direction)
     {
         for(int i = 0; i <= fraise.snake.size() - 1; i++)
@@ -84,6 +89,7 @@ public class Arene extends JFrame{
         }
     }
 
+    // Fonction qui permet de placer le snake dans le tableau 
     public void placeSnake(int[][] arene, Snake element, int id)
 {
     int array_index = 0;
@@ -102,13 +108,14 @@ public class Arene extends JFrame{
     }
 }
 
-
+    // Fonction qui retourne la coordone X dans le tableau du snake
     int get_x(Snake snake, int array_index)
     {
         int[] corps = snake.get(array_index);
         return corps[0];
     }
-
+    
+    // Fonction qui retourne la coordone Y dans le tableau du snake
     int    get_y(Snake snake, int array_index)
     {
         int[] corps = snake.get(array_index);
@@ -132,12 +139,18 @@ public class Arene extends JFrame{
         }
     }
 
-    public void placeFruits() {
+    /* public void placeFruits() {
         //faire fn
-    }
+    } */
 
+
+    // Fonction update permet de mettre  a jour l'affichage et de gerer le nombre de tour effectuer par le jeu
+    
     public void update() {
+    
+        // appele de la fonction generationFruit qui genere la fraise sur la carte
     generationFruits();
+
     tour++;
     boolean lose = false;
     if (lose == false) {
@@ -203,6 +216,7 @@ public class Arene extends JFrame{
         }
     }
 
+    // Creation de la frame qui est afficher lorsque le joueur a perdu 
     public void loseFrame(Joueur joueur){
         JFrame frame = new JFrame("BLOCKADE");
         JLabel lose = new JLabel(joueur.nom + " a perdu");
@@ -231,6 +245,7 @@ public class Arene extends JFrame{
     // A faire : implémenter la logique pour vérifier si un joueur a perdu
 
 
+    // main qui fait appel a toute les fonctions utile et initialise tous les variables 
     public static void main(String[] args) {
         int tailleFenetre = 800;
         int tailleArene = 20;

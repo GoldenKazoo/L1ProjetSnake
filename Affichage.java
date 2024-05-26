@@ -22,6 +22,7 @@ public class Affichage extends JPanel {
         draw(obj);
     }
 
+    // fonction qui permet d'afficher sur la fenetre les objets 
     public void draw(Graphics obj) {
         for (int i = 0; i < arene.length; i++) {
             for (int j = 0; j < arene[i].length; j++) {
@@ -42,7 +43,7 @@ public class Affichage extends JPanel {
                 }
                 else if(arene[i][j] == 3)
                 {
-                    obj.setColor(Color.yellow);
+                    obj.setColor(Color.pink);
                     obj.fillRect(j * tailleTuile, i * tailleTuile, tailleTuile, tailleTuile);
                 }
                 else

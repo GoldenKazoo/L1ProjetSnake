@@ -1,8 +1,7 @@
 import java.util.Random;
-import java.util.ArrayList;
-
 import javax.swing.*;
 
+// Creation de la classe AreneContreIa
 public class AreneContreIA extends JFrame{
     public int size;
     public int[][] arena;
@@ -19,6 +18,7 @@ public class AreneContreIA extends JFrame{
     public Random random;
     int nbFruits = 0;
 
+    
     public AreneContreIA(int size, int refreshtour, int tailleFenetre) {
         this.size = size;
         this.arena = new int[size][size];

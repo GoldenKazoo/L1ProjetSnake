@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import javax.swing.*;
 
 public class Joueur {
@@ -8,7 +7,7 @@ public class Joueur {
     public Joueur(String nom) {
         this.nom = nom;
     }
-
+    // Fonction qui demande au jouer le coup qu'il souhaite effectuer
     public void demanderCoup() {
         boolean answer = false;
         while (answer != true) {
@@ -24,13 +23,6 @@ public class Joueur {
             } else {
                 answer = false;
             }
-        }
-        
-        if (coup == null) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Tu as rien mis, il faut entrer un coup:");
-            coup = scanner.nextLine();
-            scanner.close();
         }
     }
 

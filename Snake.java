@@ -22,7 +22,7 @@ public class Snake {
             snake.set(i, snake.get(i - 1).clone());
         }
     }
-
+    // modifie la valeur 
     public void modifValeur(int index, int valeur) {
         int[] tete = snake.get(0);
         if (index >= 0 && index < tete.length) {
